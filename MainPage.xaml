@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sedmica5.MainPage"
+             xmlns:data="clr-namespace:Sedmica5">
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="20">
+                <Image Source="bhpe_logo_novi.png" HorizontalOptions="Start" HeightRequest="50"/>
+                <Label Text="&gt;" FontSize="Title" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame BackgroundColor="#ffcb04" CornerRadius="20" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="Dobrodošli! Elmin Marevac" TextColor="White" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                    <Label Text="Odaberite Vašu Uslugu" TextColor="White" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                    <BoxView Margin="0, 0, 0, 20" BackgroundColor="Black" HeightRequest="1"/>
+
+                    <StackLayout Margin="0, 0, 0, 10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                        <StackLayout Spacing="10">
+                            <Frame CornerRadius="10" BackgroundColor="White">
+                                <StackLayout Spacing="5">
+                                    <CheckBox IsChecked="{Binding VrstaPosiljkeList[0].Ugovorena}" BackgroundColor="Transparent" Color="#034ea2"/>
+                                    <Image Source="box.png" WidthRequest="100"/>
+                                    <Label Text="{Binding VrstaPosiljkeList[0].Vrsta}" FontAttributes="Bold" FontSize="Large" TextColor="#034ea2" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <Frame BackgroundColor="White" CornerRadius="20">
+                                <Entry x:Name="Masa" WidthRequest="100" Placeholder="Masa(kg)" BackgroundColor="White"/>
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Spacing="10">
+                            <Frame CornerRadius="10" BackgroundColor="White">
+                                <StackLayout Spacing="5">
+                                    <CheckBox IsChecked="{Binding VrstaPosiljkeList[1].Ugovorena}" BackgroundColor="Transparent" Color="#034ea2"/>
+                                    <Image Source="documents.png" WidthRequest="100"/>
+                                    <Label Text="{Binding VrstaPosiljkeList[1].Vrsta}" FontAttributes="Bold" FontSize="Large" TextColor="#034ea2" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            <Frame BackgroundColor="White" CornerRadius="20">
+                                <DatePicker x:Name="RokIsporuke" WidthRequest="100" BackgroundColor="White"/>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <FlexLayout Direction="Row" Wrap="Wrap" BindableLayout.ItemsSource="{Binding DodatneUslugaList}" >
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="data:DodatneUsluga">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox Color="#034ea2" IsChecked="{Binding Ugovorena}"/>
+                                    <Label VerticalOptions="Center" Text="{Binding NazivUsluge}"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+
+                    <Frame Margin="0,20,0,0" BackgroundColor="#034ea2" CornerRadius="30">
+                        <StackLayout>
+                            <Picker TextColor="White" x:Name="start" Title="Mjesto/grad pošiljaoca" ItemsSource="{Binding MjestoList}" ItemDisplayBinding="{Binding Naziv}"/>
+                            <Picker x:Name="end" TextColor="White" Title="Mjesto/grad primaoca" ItemsSource="{Binding MjestoList}" ItemDisplayBinding="{Binding Naziv}"/>
+
+                            <Button Clicked="Button_Clicked" CornerRadius="30" Margin="20" BackgroundColor="#ffcb04" TextColor="Black" Text="IZRAČUNAJ VRIJEDNOST POŠILJKE"/>
+                            <Label HorizontalTextAlignment="Center" TextColor="White" Text="Udaljenost se zaokružuje na jediničnu vrijednost u kilometrima"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Margin="0, 10, 0, 0" HorizontalTextAlignment="Center" Text="Iznos cijene poštanskih usluga je informativan."/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
